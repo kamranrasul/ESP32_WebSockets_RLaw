@@ -3,20 +3,12 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h> // we need this lib in platformio.ini
 
-<<<<<<< HEAD
-#define LED_ONBOARD_PIN 2
-#define LED1_PIN 25
-#define BTN1_PIN 16
-#define LED2_PIN 26
-#define BTN2_PIN 17
-=======
 #define LED_ONBOARD_PIN   2
 #define LED1_PIN   25
 #define BTN1_PIN   16
 #define LED2_PIN   26
 #define BTN2_PIN   17
 #define HTTP_PORT 80 // Web Server Setup
->>>>>>> 3854e99bed6ac5386d7abeafde34c9cf09067294
 
 const uint8_t DEBOUNCE_DELAY = 10; // in milliseconds
 
