@@ -104,12 +104,9 @@ void setup()
 void loop()
 {
     button1.read();
-    if (button1.pressed())
-    {
-        led1.on = !led1.on;
-    }
-    button2.read();
+    led1.on = button1.pressed() ? !led1.on : led1.on;
 
+    button2.read();
     led2.on = button2.held() ? true : false;
 
     led1.update();
