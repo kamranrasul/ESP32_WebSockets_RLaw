@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
-#include <FS.h>
+#include <WiFi.h>
 
 #define LED_ONBOARD_PIN 2
 #define LED1_PIN 25
@@ -9,6 +9,10 @@
 #define BTN2_PIN 17
 
 const uint8_t DEBOUNCE_DELAY = 10; // in milliseconds
+
+// WiFi credentials
+const char *WIFI_SSID = "OldRob";
+const char *WIFI_PASS = "857qw442RT";
 
 // LED
 struct Led
@@ -89,17 +93,30 @@ void initSPIFFS()
     }
 }
 
-void setup()
-{
-    pinMode(onboard_led.pin, OUTPUT);
-    pinMode(led1.pin, OUTPUT);
-    pinMode(button1.pin, INPUT);
-    pinMode(led2.pin, OUTPUT);
-    pinMode(button2.pin, INPUT);
+// Wifi Setup
+void initWiFi() {
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
+  while (WiFi.status() != WL_CONNECTED) {
+      Serial.print(".");
+      delay(500);
+  }
+  Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
+}
+
+void setup() {
+    pinMode(onboard_led.pin,  OUTPUT);
+    pinMode(led1.pin,         OUTPUT);
+    pinMode(button1.pin,      INPUT);
+    pinMode(led2.pin,         OUTPUT);
+    pinMode(button2.pin,      INPUT);
 
     Serial.begin(9600);
     delay(500);
     initSPIFFS();
+    initWiFi();
+
 }
 
 void loop()
@@ -117,9 +134,6 @@ void loop()
         led2.on = false;
     led1.update();
     led2.update();
-    if (flag)
-    {
-        onboard_led.on = millis() % 200 < 50;
-        onboard_led.update();
-    }
+    onboard_led.on = millis() % 2000 < 1000;
+    onboard_led.update();
 }
