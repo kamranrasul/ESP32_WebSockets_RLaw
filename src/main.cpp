@@ -91,22 +91,24 @@ void initSPIFFS()
     {
         Serial.println("SPIFFS volume mounted properly");
     }
-  }
-  else{
+}
+else
+{
     Serial.println("SPIFFS volume mounted properly");
-  }
 }
 
 // Wifi Setup
-void initWiFi() {
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
-  Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
-  while (WiFi.status() != WL_CONNECTED) {
-      Serial.print(".");
-      delay(500);
-  }
-  Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
+void initWiFi()
+{
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(WIFI_SSID, WIFI_PASS);
+    Serial.printf("Trying to connect [%s] ", WiFi.macAddress().c_str());
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print(".");
+        delay(500);
+    }
+    Serial.printf(" %s\n", WiFi.localIP().toString().c_str());
 }
 
 void setup()
@@ -121,7 +123,6 @@ void setup()
     delay(500);
     initSPIFFS();
     initWiFi();
-
 }
 
 void loop()
@@ -140,8 +141,8 @@ void loop()
     {
         onboard_led.on = millis() % 200 < 50;
     }
-=======
-    onboard_led.on = millis() % 2000 < 1000;
+    == == == =
+                 onboard_led.on = millis() % 2000 < 1000;
 >>>>>>> 9dc68c5d20cc64fc981d7ca9c0ec2f9ec9512689
     onboard_led.update();
 }
